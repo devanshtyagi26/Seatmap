@@ -1,0 +1,199 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.backImage {
+  /* background: url("./CC-Seating-Plan-New-Version2022_page-0001.jpg"); */
+  height: 100vh;
+  width: 62rem;
+  transform: rotate(-90deg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backImage .stage {
+  left: 32%;
+  top: 37.5%;
+  height: 6rem;
+  width: 0.5rem;
+  background-color: blue;
+  position: absolute;
+  user-select: none;
+  z-index: 0;
+}
+
+.backImage .sec_1_2_3 {
+  left: 40%;
+  top: 36.5%;
+  background-color: #ffe9ae;
+  height: 6.5rem;
+  width: 6rem;
+  position: absolute;
+}
+
+.backImage .sec_7_8_9_10 {
+  left: 37%;
+  top: 28%;
+  clip-path: polygon(0 0, 100% 1%, 94% 50%, 80% 100%, 0 100%);
+  background-color: #c1bbdd;
+  height: 3.5rem;
+  width: 9.7rem;
+  position: absolute;
+}
+
+.backImage .sec_11 {
+  left: 51%;
+  top: 33.5%;
+  transform: rotate(65deg);
+  clip-path: polygon(100% 0, 82% 100%, 18% 100%, 0 0);
+  background-color: #ffdcf4;
+  height: 3.7rem;
+  width: 3.9rem;
+  position: absolute;
+}
+
+.hovers.sec_11:hover {
+  transform: scale(1.05) rotate(65deg);
+}
+
+.backImage .sec_12 {
+  left: 55%;
+  top: 40.5%;
+
+  clip-path: polygon(69% 0%, 70% 97%, 7% 88%, 5% 9%);
+  background-color: #ffcaa4;
+  height: 3.5rem;
+  width: 2.9rem;
+  position: absolute;
+}
+
+.backImage .sec_13 {
+  left: 51.2%;
+  top: 46.6%;
+  transform: rotate(114deg);
+  clip-path: polygon(100% 0, 82% 100%, 18% 100%, 0 0);
+  background-color: #ffdcf4;
+  height: 3.7rem;
+  width: 3.9rem;
+  position: absolute;
+}
+
+.hovers.sec_13:hover {
+  transform: scale(1.05) rotate(114deg);
+}
+.backImage .sec_14_15_16_17 {
+  left: 36.8%;
+  bottom: 39.5%;
+  clip-path: polygon(8% 0%, 71% 0, 91% 50%, 98% 98%, 0 98%, 0 42%);
+  background-color: #c1bbdd;
+  height: 4rem;
+  width: 10rem;
+  position: absolute;
+}
+
+.backImage .sec_18_19_20_21_22 {
+  transform: rotatex(180deg);
+  left: 36%;
+  top: 19%;
+  clip-path: polygon(100% 0, 100% 46%, 84% 100%, 14% 100%, 0 0);
+  background-color: #dabfde;
+  height: 3.5rem;
+  width: 13.5rem;
+  position: absolute;
+}
+
+.hovers.sec_18_19_20_21_22:hover {
+  transform: scale(1.05) rotateX(180deg);
+}
+.backImage .sec_23_24_25_26_27 {
+  left: 56%;
+  top: 29%;
+  clip-path: polygon(
+    64% 0,
+    89% 19%,
+    97% 55%,
+    90% 73%,
+    63% 99%,
+    14% 87%,
+    34% 69%,
+    36% 31%,
+    14% 12%
+  );
+  background-color: #cce2cb;
+  height: 14.1rem;
+  width: 5.5rem;
+  position: absolute;
+}
+.backImage .sec_28_29_30_31_32 {
+  bottom: 31%;
+  left: 36%;
+  clip-path: polygon(100% 0, 100% 46%, 84% 100%, 14% 100%, 0 0);
+  background-color: #dabfde;
+  height: 3.5rem;
+  width: 13.5rem;
+  position: absolute;
+}
+
+.backImage .door_2 {
+  left: 51.6%;
+  bottom: 66.4%;
+  clip-path: polygon(26% 2%, 79% 10%, 100% 96%, 10% 89%);
+  background-color: #c1e7e3;
+  height: 1.8rem;
+  width: 2.5rem;
+  position: absolute;
+  transform: rotate(221deg);
+}
+
+.hovers.door_2:hover {
+  transform: scale(1.05) rotate(221deg);
+}
+
+.backImage .door_3 {
+  left: 51.5%;
+  bottom: 41%;
+  clip-path: polygon(27% 7%, 80% 0%, 100% 100%, 4% 100%);
+  background-color: #c1e7e3;
+  height: 1.8rem;
+  width: 2.5rem;
+  position: absolute;
+  transform: rotate(319deg);
+}
+
+.hovers.door_3:hover {
+  transform: rotate(319deg) scale(1.05);
+}
+
+#arcs {
+  top: -7%;
+  left: -4%;
+  position: relative;
+  user-select: none;
+  z-index: 0;
+  border: 2px solid #000;
+  display: inline-block;
+  min-width: 28em;
+  min-height: 28em;
+  padding: 0.5em;
+  border-radius: 50%;
+  border-left-color: transparent;
+}
+
+.hovers {
+  cursor: pointer;
+  border-radius: 10px;
+  transition: transform 0.3s ease; /* Smooth scaling transition */
+}
+
+.hovers:hover {
+  transform: scale(1.05); /* Scale the element by 10% on hover */
+}

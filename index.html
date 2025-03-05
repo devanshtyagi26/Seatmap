@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="popup.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="backImage">
+      <div class="stage"></div>
+      <div id="arcs"></div>
+      <div onclick="show('popup1')" class="hovers sec_1_2_3"></div>
+      <div onclick="show('popup1')" class="hovers sec_7_8_9_10"></div>
+      <div onclick="show('popup1')" class="hovers sec_11"></div>
+      <div onclick="show('popup1')" class="hovers sec_12"></div>
+
+      <div onclick="show('popup1')" class="hovers sec_13"></div>
+      <div onclick="show('popup1')" class="hovers sec_14_15_16_17"></div>
+      <div onclick="show('popup1')" class="hovers sec_28_29_30_31_32"></div>
+      <div onclick="show('popup1')" class="hovers door_2"></div>
+
+      <div onclick="show('popup1')" class="hovers sec_18_19_20_21_22"></div>
+      <div onclick="show('popup1')" class="hovers sec_23_24_25_26_27"></div>
+      <div onclick="show('popup1')" class="hovers door_3"></div>
+    </div>
+    <div class="popup" id="popup1">
+      <a href="#" onclick="hide('popup1')"
+        ><svg
+          width="10"
+          height="10"
+          viewBox="0 0 10 10"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <line
+            x1="0.806022"
+            y1="0.696053"
+            x2="8.9092"
+            y2="8.79923"
+            stroke="#EC174F"
+            stroke-width="0.810318"
+          />
+          <line
+            x1="1.04359"
+            y1="8.7992"
+            x2="9.14676"
+            y2="0.696026"
+            stroke="#EC174F"
+            stroke-width="0.810318"
+          />
+        </svg>
+      </a>
+    </div>
+  </body>
+  <script src="popup.js"></script>
+</html>
