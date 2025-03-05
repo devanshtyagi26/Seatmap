@@ -134,10 +134,18 @@
           <p>Some text in the Modal..</p>
           <span class="close">&times;</span>
         </div>
-        <div class="seatMapping"></div>
+        <div class="zoom-buttons">
+          <button onclick="zoomIn()">Zoom In</button>
+          <button onclick="zoomOut()">Zoom Out</button>
+          <button onclick="resetZoom()">Reset</button>
+        </div>
+        <div class="seatMapping-container">
+          <div class="seatMapping" id="seatMapping"></div>
+        </div>
       </div>
     </div>
   </body>
   <script src="script.js"></script>
   <script src="generateSvg.js"></script>
+  <script src="zoom.js"></script>
 </html>

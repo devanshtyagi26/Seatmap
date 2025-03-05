@@ -35,16 +35,41 @@
   width: 100%;
   justify-content: space-between;
 }
+
+.seatMapping-container {
+  position: relative;
+  width: 100%;
+  height: 80%;
+  overflow: auto;
+  border: 2px solid #333;
+  background: #f9f9f9;
+}
+
+.zoom-buttons {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.zoom-buttons button {
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 .modal-content .seatMapping {
+  transform-origin: top left;
+  transition: transform 0.3s ease-in-out;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: baseline;
   position: relative;
-  width: 80%;
+  width: 100%;
   height: fit-content;
   justify-self: center;
   align-self: center;
-  overflow: scroll;
+  cursor: grab;
 }
 
 .modal-content .seatMapping svg {
