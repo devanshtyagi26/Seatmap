@@ -15,8 +15,8 @@ export class SVGGrid {
     let height = this.rowCount * this.spacingY + this.radius * 2;
 
     let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("width", width);
-    svg.setAttribute("height", height);
+    svg.setAttribute("width", width / 6);
+    svg.setAttribute("height", height / 6);
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
     svg.setAttribute("fill", "none");
     svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -95,7 +95,11 @@ export function createSVGsFromMap(
     let grid = new SVGGrid(sectorName, sectorConfig, sectorOffsetX);
     let svgElement = grid.generateSVG();
 
-    container.appendChild(svgElement);
-    sectorOffsetX += parseInt(svgElement.getAttribute("width"), 10) + 50; // Offset the next sector horizontally
+    let spanWrapper = document.createElement("span");
+    spanWrapper.appendChild(svgElement);
+
+    container.appendChild(spanWrapper);
+
+    // sectorOffsetX += parseInt(svgElement.getAttribute("width"), 10); // Offset the next sector horizontally
   }
 }

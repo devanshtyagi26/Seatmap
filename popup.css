@@ -43,6 +43,8 @@
   overflow: auto;
   border: 2px solid #333;
   background: #f9f9f9;
+  display: inline-flex;
+  justify-content: center;
 }
 
 .zoom-buttons {
@@ -63,17 +65,21 @@
   padding: 20px;
   display: flex;
   justify-content: center;
+  gap: 1rem;
   position: relative;
-  width: 100%;
-  height: fit-content;
+  width: 80%;
+  height: 90%;
   justify-self: center;
   align-self: center;
   cursor: grab;
 }
 
+.modal-content .seatMapping span {
+  display: inline;
+}
 .modal-content .seatMapping svg {
-  height: 70%;
-  max-width: 80%;
+  height: 100%;
+  width: 100%;
 }
 
 /* The Close Button */
