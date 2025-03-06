@@ -45,6 +45,11 @@
   background: #f9f9f9;
   display: inline-flex;
   justify-content: center;
+  scrollbar-width: none; /* For Firefox */
+}
+
+.seatMapping-container::-webkit-scrollbar {
+  display: none; /* For Chrome, Edge, and Safari */
 }
 
 .zoom-buttons {

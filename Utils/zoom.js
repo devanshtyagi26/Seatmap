@@ -1,79 +1,72 @@
 let scale = 1,
   minScale = 0.5, // Minimum zoom level
-  maxScale = 3, // Maximum zoom level
-  panning = false,
+  maxScale = 4, // Maximum zoom level
+  zoomStep = 0.3,
+  isPanning = false,
+  start = { x: 0, y: 0 },
   xoff = 0,
-  yoff = 0,
-  start = { x: 0, y: 0 };
+  yoff = 0;
 
-const zoomStep = 0.2;
 const seatMappingContainer = document.querySelector(".seatMapping-container");
 const seatMapping = document.getElementById("seatMapping");
 
 function zoomIn() {
-  if (scale < maxScale) {
-    scale = Math.min(scale + zoomStep, maxScale);
-    updateZoom();
-  }
+  setZoom(scale + zoomStep);
 }
 
 function zoomOut() {
-  if (scale > minScale) {
-    scale = Math.max(scale - zoomStep, minScale);
-    updateZoom();
-  }
+  setZoom(scale - zoomStep);
 }
 
 function resetZoom() {
   scale = 1;
   xoff = 0;
   yoff = 0;
-  updateZoom();
+  applyTransform();
 }
 
-function updateZoom() {
+function setZoom(newScale, mouseX = null, mouseY = null) {
+  if (newScale < minScale || newScale > maxScale) return;
+
+  const rect = seatMapping.getBoundingClientRect();
+  const centerX = mouseX !== null ? mouseX - rect.left : rect.width / 2;
+  const centerY = mouseY !== null ? mouseY - rect.top : rect.height / 2;
+
+  // Adjust offsets to maintain zoom focus
+  xoff = centerX - (centerX - xoff) * (newScale / scale);
+  yoff = centerY - (centerY - yoff) * (newScale / scale);
+
+  scale = newScale;
+  applyTransform();
+}
+
+function applyTransform() {
   seatMapping.style.transform = `translate(${xoff}px, ${yoff}px) scale(${scale})`;
   seatMapping.style.transformOrigin = "0 0";
 }
 
-// Allow panning when zoomed in
-seatMappingContainer.onmousedown = function (e) {
+// Handle mouse wheel zooming
+seatMappingContainer.addEventListener("wheel", function (e) {
   e.preventDefault();
+  const delta = e.deltaY < 0 ? 1.2 : 1 / 1.2; // Zoom in/out
+  setZoom(scale * delta, e.clientX, e.clientY);
+});
+
+// Handle panning
+seatMappingContainer.addEventListener("mousedown", function (e) {
+  e.preventDefault();
+  isPanning = true;
   start = { x: e.clientX - xoff, y: e.clientY - yoff };
-  panning = true;
-};
+});
 
-seatMappingContainer.onmouseup = function () {
-  panning = false;
-};
+document.addEventListener("mouseup", function () {
+  isPanning = false;
+});
 
-seatMappingContainer.onmousemove = function (e) {
-  if (!panning) return;
+document.addEventListener("mousemove", function (e) {
+  if (!isPanning) return;
   e.preventDefault();
   xoff = e.clientX - start.x;
   yoff = e.clientY - start.y;
-  updateZoom();
-};
-
-// Scroll to zoom from anywhere inside the container
-seatMappingContainer.onwheel = function (e) {
-  e.preventDefault();
-  const rect = seatMapping.getBoundingClientRect();
-
-  // Get cursor position relative to seatMapping
-  let xs = (e.clientX - rect.left) / scale,
-    ys = (e.clientY - rect.top) / scale,
-    delta = e.wheelDelta ? e.wheelDelta : -e.deltaY;
-
-  // Adjust scale within min/max limits
-  let newScale = delta > 0 ? scale * 1.2 : scale / 1.2;
-  if (newScale < minScale || newScale > maxScale) return;
-
-  scale = newScale;
-
-  // Keep the zoom centered around the cursor
-  xoff = e.clientX - xs * scale;
-  yoff = e.clientY - ys * scale;
-
-  updateZoom();
-};
+  applyTransform();
+});

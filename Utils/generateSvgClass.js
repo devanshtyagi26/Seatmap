@@ -10,22 +10,9 @@ export class SVGGrid {
     this.offsetX = offsetX;
   }
 
-  generateSVG() {
-    let width = this.colCount * this.spacingX + this.radius * 2;
-    let height = this.rowCount * this.spacingY + this.radius * 2;
-
-    let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("width", width / 6);
-    svg.setAttribute("height", height / 6);
-    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-    svg.setAttribute("fill", "none");
-    svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    svg.setAttribute("style", `transform: translateX(${this.offsetX}px);`);
-
-    let sectorGroup = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "g"
-    );
+  generateGroup() {
+    let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    group.setAttribute("transform", `translate(${this.offsetX}, 0)`);
 
     let rowIndex = 0;
     for (let rowMap of this.rows) {
@@ -39,7 +26,7 @@ export class SVGGrid {
         rowLabel.setAttribute("y", rowIndex * this.spacingY + this.radius * 2);
         rowLabel.setAttribute("fill", "black");
         rowLabel.textContent = rowConfig.rowName;
-        sectorGroup.appendChild(rowLabel);
+        group.appendChild(rowLabel);
 
         // Columns (Circles)
         let colIndex = 0;
@@ -57,7 +44,7 @@ export class SVGGrid {
           circle.setAttribute("fill", "#50CF70");
           circle.setAttribute("data-name", colName);
 
-          sectorGroup.appendChild(circle);
+          group.appendChild(circle);
           colIndex++;
         }
 
@@ -65,13 +52,7 @@ export class SVGGrid {
       }
     }
 
-    svg.appendChild(sectorGroup);
-    return svg;
-  }
-
-  appendSVGToContainer(container) {
-    let svg = this.generateSVG();
-    container.appendChild(svg);
+    return group;
   }
 }
 
@@ -91,15 +72,31 @@ export function createSVGsFromMap(
   let sectors = svgConfigsMap.get(sectionName);
   let sectorOffsetX = 0;
 
+  // Create a single SVG
+  let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("width", "100%"); // Responsive width
+  svg.setAttribute("height", "100%"); // Responsive height
+  svg.setAttribute("fill", "none");
+  svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+
+  // Create a <g> container for all sectors
+  let mainGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
   for (let [sectorName, sectorConfig] of sectors) {
     let grid = new SVGGrid(sectorName, sectorConfig, sectorOffsetX);
-    let svgElement = grid.generateSVG();
+    let groupElement = grid.generateGroup();
 
-    let spanWrapper = document.createElement("span");
-    spanWrapper.appendChild(svgElement);
-
-    container.appendChild(spanWrapper);
-
-    // sectorOffsetX += parseInt(svgElement.getAttribute("width"), 10); // Offset the next sector horizontally
+    mainGroup.appendChild(groupElement);
+    sectorOffsetX +=
+      sectorConfig.col_count * sectorConfig.spacingX + sectorConfig.radius * 6;
   }
+
+  svg.appendChild(mainGroup);
+  container.appendChild(svg);
+
+  // After appending, calculate the bounding box of the entire <g>
+  setTimeout(() => {
+    let bbox = mainGroup.getBBox();
+    svg.setAttribute("viewBox", `0 0 ${bbox.width} ${bbox.height}`);
+  }, 0);
 }
