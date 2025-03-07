@@ -1,6 +1,5 @@
 export class SVGGrid {
   constructor(sectorName, sectorConfig, offsetX = 0) {
-    // Store sector properties
     this.sectorName = sectorName;
     this.rowCount = sectorConfig.row_count;
     this.colCount = sectorConfig.col_count;
@@ -10,15 +9,11 @@ export class SVGGrid {
     this.rows = sectorConfig.rows;
     this.offsetX = offsetX;
   }
-
   generateGroup() {
-    // Create main <g> element for the sector
     let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
     group.setAttribute("transform", `translate(${this.offsetX}, 0)`);
 
     let rowIndex = 0;
-
-    // Loop through rows
     for (let rowMap of this.rows) {
       for (let rowEntry of rowMap) {
         let rowConfig = rowEntry[0][1]; // Extract row config correctly
@@ -33,7 +28,7 @@ export class SVGGrid {
         );
         rowGroup.setAttribute("class", "row-group");
 
-        // Calculate row alignment (left, center, or right)
+        // Calculate rowGroup X translation based on alignment
         let rowGroupX;
         if (rowConfig.align === "left") {
           rowGroupX = 0;
@@ -60,6 +55,7 @@ export class SVGGrid {
         rowLabel.setAttribute("text-anchor", "start");
         rowLabel.setAttribute("dominant-baseline", "middle");
         rowLabel.setAttribute("class", "svg-text");
+
         rowLabel.textContent = rowConfig.rowName;
         rowGroup.appendChild(rowLabel);
 
@@ -78,6 +74,11 @@ export class SVGGrid {
           circle.setAttribute("r", this.radius);
           circle.setAttribute("fill", "#50CF70");
           circle.setAttribute("data-name", colName);
+          circle.setAttribute("class", "circleSeats");
+          circle.setAttribute(
+            "id",
+            `circle-${this.sectorName}-${rowIndex}-${colIndex}`
+          ); // Unique ID
 
           rowGroup.appendChild(circle);
           colIndex++;
@@ -87,6 +88,7 @@ export class SVGGrid {
         rowIndex++;
       }
     }
+
     return group;
   }
 }
@@ -99,7 +101,6 @@ export function createSVGsFromMap(
   let container = document.querySelector(containerSelector);
   container.innerHTML = ""; // Clear previous content
 
-  // Check if the given section exists in the configuration map
   if (!svgConfigsMap.has(sectionName)) {
     console.error(`Section ${sectionName} not found in svgConfigsMap`);
     return;
@@ -108,7 +109,7 @@ export function createSVGsFromMap(
   let sectors = svgConfigsMap.get(sectionName);
   let sectorOffsetX = 0;
 
-  // Create the SVG element
+  // Create a single SVG
   let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("width", "100%"); // Responsive width
   svg.setAttribute("height", "100%"); // Responsive height
@@ -118,13 +119,11 @@ export function createSVGsFromMap(
   // Create a <g> container for all sectors
   let mainGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
 
-  // Loop through all sectors and add them to the main group
   for (let [sectorName, sectorConfig] of sectors) {
     let grid = new SVGGrid(sectorName, sectorConfig, sectorOffsetX);
     let groupElement = grid.generateGroup();
-    mainGroup.appendChild(groupElement);
 
-    // Update the offset for the next sector
+    mainGroup.appendChild(groupElement);
     sectorOffsetX +=
       sectorConfig.col_count * sectorConfig.spacingX + sectorConfig.radius * 6;
   }
@@ -137,7 +136,7 @@ export function createSVGsFromMap(
     let bbox = mainGroup.getBBox();
     svg.setAttribute("viewBox", `0 0 ${bbox.width} ${bbox.height}`);
 
-    // Initialize svgPanZoom for zooming and panning functionality
+    // Initialize svgPanZoom
     let panZoom = window.svgPanZoom(svg, {
       zoomEnabled: true,
       controlIconsEnabled: false, // Disable default controls since we have custom buttons
@@ -146,9 +145,14 @@ export function createSVGsFromMap(
       minZoom: 0.5,
       maxZoom: 7,
       panEnabled: true,
+      onPan: function () {
+        svg.style.cursor = "grabbing"; // Change cursor when panning starts
+      },
     });
-
-    // Attach event listeners to custom zoom buttons
+    svg.addEventListener("mouseup", () => {
+      svg.style.cursor = "crosshair";
+    });
+    // Attach event listeners to your custom buttons
     document.getElementById("zoomIn").addEventListener("click", function (ev) {
       ev.preventDefault();
       panZoom.zoomIn();

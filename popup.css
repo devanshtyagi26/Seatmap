@@ -74,7 +74,7 @@
   height: 90%;
   justify-self: center;
   align-self: center;
-  cursor: grab;
+  cursor: crosshair;
   grid-area: seats;
 }
 
@@ -120,4 +120,13 @@
   color: black;
   font-size: 3rem;
   transform: translateX(-55px);
+}
+
+.circleSeats {
+  cursor: pointer;
+}
+
+.circleSeats:hover {
+  background-color: gray;
+  fill: gray;
 }
