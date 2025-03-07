@@ -65,14 +65,12 @@
 }
 
 .modal-content .seatMapping {
+  background-color: white;
   transform-origin: top left;
   transition: transform 0.3s ease-in-out;
-  padding: 0 0 2rem 0;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
   position: relative;
-  width: 80%;
+  padding: 0.2rem;
+  width: 90%;
   height: 90%;
   justify-self: center;
   align-self: center;
@@ -116,4 +114,10 @@
 .svg-pan-zoom_controls {
   top: 10px;
   right: 10px;
+}
+
+.svg-text {
+  color: black;
+  font-size: 3rem;
+  transform: translateX(-55px);
 }

@@ -51,9 +51,11 @@ export class SVGGrid {
         );
         rowLabel.setAttribute("x", 0);
         rowLabel.setAttribute("y", 0);
-        rowLabel.setAttribute("fill", "black");
+        rowLabel.setAttribute("fill", "black"); // Text color
         rowLabel.setAttribute("text-anchor", "start");
         rowLabel.setAttribute("dominant-baseline", "middle");
+        rowLabel.setAttribute("class", "svg-text");
+
         rowLabel.textContent = rowConfig.rowName;
         rowGroup.appendChild(rowLabel);
 
