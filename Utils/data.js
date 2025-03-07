@@ -47,7 +47,7 @@ export const svgConfigsMap = new Map([
                 ["cols", ["1", "2", "3", "4", "5", "6", "7"]],
               ],
               [
-                ["config", { rowName: "Y", align: "center" }],
+                ["config", { rowName: "Y", align: "right" }],
                 ["cols", ["1", "2", "3", "4", "5"]],
               ],
             ]),

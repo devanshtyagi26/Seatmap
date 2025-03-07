@@ -39,11 +39,16 @@
 .seatMapping-container {
   position: relative;
   width: 100%;
-  height: 80%;
+  height: 90%;
   overflow: auto;
   border: 2px solid #333;
   background: #f9f9f9;
-  display: inline-flex;
+  display: grid;
+  grid-template-rows: auto 1fr 1fr;
+  grid-template-areas:
+    "skeleton . . . cart cart"
+    "seats seats seats seats cart cart"
+    "seats seats seats seats cart cart";
   justify-content: center;
   scrollbar-width: none; /* For Firefox */
 }
@@ -52,22 +57,17 @@
   display: none; /* For Chrome, Edge, and Safari */
 }
 
-.zoom-buttons {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.zoom-buttons button {
-  padding: 10px 15px;
-  margin: 5px;
-  font-size: 14px;
-  cursor: pointer;
+.seatMapping-container .checkout {
+  grid-area: cart;
+  height: 100%;
+  width: 21rem;
+  background-color: #333;
 }
 
 .modal-content .seatMapping {
   transform-origin: top left;
   transition: transform 0.3s ease-in-out;
-  padding: 20px;
+  padding: 0 0 2rem 0;
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -77,6 +77,7 @@
   justify-self: center;
   align-self: center;
   cursor: grab;
+  grid-area: seats;
 }
 
 .modal-content .seatMapping span {
@@ -86,7 +87,17 @@
   height: 100%;
   width: 100%;
 }
+.modal-content .seatMapping svg g text {
+  user-select: none;
+}
 
+.seatMapping-container .outlineSvgSkeleton {
+  height: fit-content;
+  width: 13%;
+  position: relative;
+  grid-area: skeleton;
+  padding: 0 1.4rem 0 1.4rem;
+}
 /* The Close Button */
 .close {
   color: #aaaaaa;

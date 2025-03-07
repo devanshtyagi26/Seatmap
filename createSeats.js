@@ -1,5 +1,6 @@
 import { svgConfigsMap } from "./Utils/data.js";
 import { createSVGsFromMap } from "./Utils/generateSvgClass.js";
+import highlightPathById from "./Utils/svgOutline.js";
 
 // Attach event listener to each <g> element
 document.querySelectorAll("svg g").forEach((group) => {
@@ -12,7 +13,10 @@ document.querySelectorAll("svg g").forEach((group) => {
       openModalWithSVG(10, 14, 50, 100, 15); // Example: 3 rows, 10 columns, 200px spacing, 50px radius
     }
     if (group.dataset.tooltip === "Section 28-29-30-31-32") {
+      highlightPathById("section1");
       createSVGsFromMap(svgConfigsMap, "Sec1", ".seatMapping");
     }
   });
 });
+
+console.log(window.svgPanZoom);
