@@ -18,5 +18,3 @@ document.querySelectorAll("svg g").forEach((group) => {
     }
   });
 });
-
-console.log(window.svgPanZoom);
