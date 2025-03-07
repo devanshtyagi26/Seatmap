@@ -12,7 +12,7 @@ export class SVGGrid {
   generateGroup() {
     let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
     group.setAttribute("transform", `translate(${this.offsetX}, 0)`);
-  
+
     let rowIndex = 0;
     for (let rowMap of this.rows) {
       for (let rowEntry of rowMap) {
@@ -20,58 +20,70 @@ export class SVGGrid {
         let colData = rowEntry[1][1]; // Extract column data correctly
         let colCount = colData.length; // Number of columns in the row
         let rowHeight = rowIndex * this.spacingY + this.radius * 2;
-  
+
         // Create a row group
-        let rowGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        let rowGroup = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "g"
+        );
         rowGroup.setAttribute("class", "row-group");
-  
+
         // Calculate rowGroup X translation based on alignment
         let rowGroupX;
         if (rowConfig.align === "left") {
           rowGroupX = 0;
         } else if (rowConfig.align === "right") {
-          rowGroupX = (this.colCount * this.spacingX) - (colCount * this.spacingX);
+          rowGroupX = this.colCount * this.spacingX - colCount * this.spacingX;
         } else if (rowConfig.align === "center") {
-          rowGroupX = (this.colCount * this.spacingX - colCount * this.spacingX) / 2;
+          rowGroupX =
+            (this.colCount * this.spacingX - colCount * this.spacingX) / 2;
         }
-  
-        rowGroup.setAttribute("transform", `translate(${rowGroupX}, ${rowHeight})`);
-  
+
+        rowGroup.setAttribute(
+          "transform",
+          `translate(${rowGroupX}, ${rowHeight})`
+        );
+
         // Create Row Label
-        let rowLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        let rowLabel = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "text"
+        );
         rowLabel.setAttribute("x", 0);
         rowLabel.setAttribute("y", 0);
         rowLabel.setAttribute("fill", "black");
-        rowLabel.setAttribute("text-anchor", "start"); 
+        rowLabel.setAttribute("text-anchor", "start");
         rowLabel.setAttribute("dominant-baseline", "middle");
         rowLabel.textContent = rowConfig.rowName;
         rowGroup.appendChild(rowLabel);
-  
+
         // Create Column Circles
         let colIndex = 0;
         for (let colName of colData) {
           let cx = colIndex * this.spacingX + this.radius * 2;
           let cy = 0;
-  
-          let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+
+          let circle = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "circle"
+          );
           circle.setAttribute("cx", cx);
           circle.setAttribute("cy", cy);
           circle.setAttribute("r", this.radius);
           circle.setAttribute("fill", "#50CF70");
           circle.setAttribute("data-name", colName);
-  
+
           rowGroup.appendChild(circle);
           colIndex++;
         }
-  
+
         group.appendChild(rowGroup);
         rowIndex++;
       }
     }
-  
+
     return group;
   }
-  
 }
 
 export function createSVGsFromMap(
@@ -92,8 +104,8 @@ export function createSVGsFromMap(
 
   // Create a single SVG
   let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("width", "70%"); // Responsive width
-  svg.setAttribute("height", "70%"); // Responsive height
+  svg.setAttribute("width", "100%"); // Responsive width
+  svg.setAttribute("height", "100%"); // Responsive height
   svg.setAttribute("fill", "none");
   svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
 
@@ -117,15 +129,31 @@ export function createSVGsFromMap(
     let bbox = mainGroup.getBBox();
     svg.setAttribute("viewBox", `0 0 ${bbox.width} ${bbox.height}`);
 
-    // **Initialize svg-pan-zoom using the CDN version**
-    window.svgPanZoom(svg, {
+    // Initialize svgPanZoom
+    let panZoom = window.svgPanZoom(svg, {
       zoomEnabled: true,
-      controlIconsEnabled: true,
-      fit: false,
+      controlIconsEnabled: false, // Disable default controls since we have custom buttons
+      fit: true,
       center: true,
       minZoom: 0.5,
       maxZoom: 7,
       panEnabled: true,
+    });
+
+    // Attach event listeners to your custom buttons
+    document.getElementById("zoomIn").addEventListener("click", function (ev) {
+      ev.preventDefault();
+      panZoom.zoomIn();
+    });
+
+    document.getElementById("zoomOut").addEventListener("click", function (ev) {
+      ev.preventDefault();
+      panZoom.zoomOut();
+    });
+
+    document.getElementById("reset").addEventListener("click", function (ev) {
+      ev.preventDefault();
+      panZoom.resetZoom();
     });
   }, 0);
 }

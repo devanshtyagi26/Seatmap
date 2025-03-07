@@ -139,20 +139,97 @@
 
         <div class="seatMapping-container">
           <div class="checkout"></div>
-          <svg class="outlineSvgSkeleton" width="1321" height="1046" viewBox="0 0 1321 1046" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path id="section1" fill="white" d="M1317.97 951.429L1311.15 363.865L1214.64 253.996L1155.66 264.524M1155.41 264.963V1022.35L1317.97 952.123" stroke="#C8C8C8"  stroke-width="2"/>
-            <path id="section2" fill="white" d="M165.564 1041.85V284.468L93.7683 266.675L3 373.778V971.628L165.564 1041.85Z" stroke="#C8C8C8"  stroke-width="2"/>
-            <path id="section3" fill="white" d="M978.383 248.252C696.486 109.809 563.999 148.96 334.143 248.252L247.562 108.154C556.803 -24.9224 734.473 -39.0038 1063.55 108.154L978.383 248.252Z" stroke="#C8C8C8"  stroke-width="2"/>
-            <path id="section4" fill="white" d="M222.09 434.445C257.832 389.145 276.728 372.298 323.108 338.818M221.789 434.63L317.856 471.049C337.058 445.716 351.345 433.794 381.9 415.82L323.062 338.563C278.56 370.595 256.084 391.291 221.789 434.63Z" stroke="#C8C8C8"  stroke-width="2"/>
-            <path id="section5" fill="white" d="M1088.84 429.285C1053.1 383.985 1034.2 367.138 987.824 333.658M1088.89 429.47L992.822 465.889C973.62 440.556 959.333 428.634 928.777 410.659L987.616 333.403C1032.12 365.434 1054.59 386.131 1088.89 429.47Z" stroke="#C8C8C8"  stroke-width="2"/>
-            <path id="section6" fill="white" d="M512.183 249.321C432.247 267.873 390.588 284.079 325.395 329.678L455.659 511.284C491.256 485.383 513.682 476.468 557.44 469.266L512.183 249.321Z" stroke="#C8C8C8"  stroke-width="2"/>
-            <path id="section7" fill="white" d="M795.296 246.129C875.232 264.681 916.891 280.886 982.085 326.485L851.821 508.092C816.224 482.191 793.797 473.276 750.039 466.074L795.296 246.129Z" stroke="#C8C8C8"  stroke-width="2"/>
-            <path id="section8" fill="white" d="M582.107 459.139L539.465 242.93C630.382 225.478 679.231 227.625 764.315 242.93L718.757 459.139C668.99 450.228 639.682 448.701 582.107 459.139Z" stroke="#C8C8C8"  stroke-width="2"/>
-            <path id="section9" fill="white" d="M214.199 439.442V1026.09H374.449L436.62 933.728V590.391L319.706 477.92L214.199 439.442Z" stroke="#C8C8C8"  stroke-width="2"/>
-            <path id="section10" fill="white" d="M1106.8 439.466V1026.12H946.549L884.379 933.752V590.415L1001.29 477.943L1106.8 439.466Z" stroke="#C8C8C8"  stroke-width="2"/>
-            <path id="section11" fill="white" d="M479.125 556.449H857.374V888.979H479.125V556.449Z" stroke="#C8C8C8"  stroke-width="2"/>
-            </svg>
-            
+          <div class="buttons">
+            <button id="zoomIn">Zoom In</button>
+            <button id="reset">Reset</button>
+            <button id="zoomOut">Zoom Out</button>
+          </div>
+          <svg
+            class="outlineSvgSkeleton"
+            width="1321"
+            height="1046"
+            viewBox="0 0 1321 1046"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              id="section1"
+              fill="white"
+              d="M1317.97 951.429L1311.15 363.865L1214.64 253.996L1155.66 264.524M1155.41 264.963V1022.35L1317.97 952.123"
+              stroke="#C8C8C8"
+              stroke-width="2"
+            />
+            <path
+              id="section2"
+              fill="white"
+              d="M165.564 1041.85V284.468L93.7683 266.675L3 373.778V971.628L165.564 1041.85Z"
+              stroke="#C8C8C8"
+              stroke-width="2"
+            />
+            <path
+              id="section3"
+              fill="white"
+              d="M978.383 248.252C696.486 109.809 563.999 148.96 334.143 248.252L247.562 108.154C556.803 -24.9224 734.473 -39.0038 1063.55 108.154L978.383 248.252Z"
+              stroke="#C8C8C8"
+              stroke-width="2"
+            />
+            <path
+              id="section4"
+              fill="white"
+              d="M222.09 434.445C257.832 389.145 276.728 372.298 323.108 338.818M221.789 434.63L317.856 471.049C337.058 445.716 351.345 433.794 381.9 415.82L323.062 338.563C278.56 370.595 256.084 391.291 221.789 434.63Z"
+              stroke="#C8C8C8"
+              stroke-width="2"
+            />
+            <path
+              id="section5"
+              fill="white"
+              d="M1088.84 429.285C1053.1 383.985 1034.2 367.138 987.824 333.658M1088.89 429.47L992.822 465.889C973.62 440.556 959.333 428.634 928.777 410.659L987.616 333.403C1032.12 365.434 1054.59 386.131 1088.89 429.47Z"
+              stroke="#C8C8C8"
+              stroke-width="2"
+            />
+            <path
+              id="section6"
+              fill="white"
+              d="M512.183 249.321C432.247 267.873 390.588 284.079 325.395 329.678L455.659 511.284C491.256 485.383 513.682 476.468 557.44 469.266L512.183 249.321Z"
+              stroke="#C8C8C8"
+              stroke-width="2"
+            />
+            <path
+              id="section7"
+              fill="white"
+              d="M795.296 246.129C875.232 264.681 916.891 280.886 982.085 326.485L851.821 508.092C816.224 482.191 793.797 473.276 750.039 466.074L795.296 246.129Z"
+              stroke="#C8C8C8"
+              stroke-width="2"
+            />
+            <path
+              id="section8"
+              fill="white"
+              d="M582.107 459.139L539.465 242.93C630.382 225.478 679.231 227.625 764.315 242.93L718.757 459.139C668.99 450.228 639.682 448.701 582.107 459.139Z"
+              stroke="#C8C8C8"
+              stroke-width="2"
+            />
+            <path
+              id="section9"
+              fill="white"
+              d="M214.199 439.442V1026.09H374.449L436.62 933.728V590.391L319.706 477.92L214.199 439.442Z"
+              stroke="#C8C8C8"
+              stroke-width="2"
+            />
+            <path
+              id="section10"
+              fill="white"
+              d="M1106.8 439.466V1026.12H946.549L884.379 933.752V590.415L1001.29 477.943L1106.8 439.466Z"
+              stroke="#C8C8C8"
+              stroke-width="2"
+            />
+            <path
+              id="section11"
+              fill="white"
+              d="M479.125 556.449H857.374V888.979H479.125V556.449Z"
+              stroke="#C8C8C8"
+              stroke-width="2"
+            />
+          </svg>
 
           <div class="seatMapping" id="seatMapping"></div>
         </div>
@@ -162,4 +239,5 @@
   <script src="./Utils/script.js"></script>
   <script type="module" src="./createSeats.js"></script>
   <!-- <script src="./Utils/zoom.js"></script> -->
+
 </html>
