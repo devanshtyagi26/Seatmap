@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
 
 /* The Modal (background) */
 .modal {
@@ -45,10 +46,11 @@
   background: #f9f9f9;
   display: grid;
   grid-template-rows: auto 1fr 1fr;
+  grid-template-columns: auto 1fr 1fr 1fr 1fr auto;
   grid-template-areas:
-    "skeleton . . . cart cart"
-    "seats seats seats seats cart cart"
-    "seats seats seats seats cart cart";
+    "skeleton buttons buttons buttons buttons cart"
+    "seats seats seats seats seats cart"
+    "seats seats seats seats seats cart";
   justify-content: center;
   scrollbar-width: none; /* For Firefox */
 }
@@ -96,6 +98,13 @@
   grid-area: skeleton;
   padding: 0 1.4rem 0 1.4rem;
 }
+
+/* Fix the buttons to be in the right grid area */
+.seatMapping-container .buttons {
+  grid-area: buttons;
+  justify-self: end; /* Align to the right edge of its grid area */
+}
+
 /* The Close Button */
 .close {
   color: #aaaaaa;
@@ -109,6 +118,102 @@
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* Zoom controls styling */
+.buttons {
+  position: relative;
+  margin: 10px 10px 10px auto;
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50px;
+  padding: 8px 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+  align-self: flex-end;
+}
+
+.buttons:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.buttons button {
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0; /* Hide text for icon-only display */
+  color: #333;
+  background-color: #fff;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  outline: none;
+  position: relative;
+}
+
+.buttons button:hover {
+  transform: translateY(-2px);
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.buttons button:active {
+  transform: translateY(0);
+  background-color: #e8e8e8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon styles using Font Awesome */
+#zoomIn::before {
+  content: "\f00e"; /* magnifying glass with plus */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 16px;
+}
+
+#reset::before {
+  content: "\f78c"; /* expand arrows */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 16px;
+}
+
+#zoomOut::before {
+  content: "\f010"; /* magnifying glass with minus */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 16px;
+}
+
+/* Tooltip for buttons */
+.buttons button::after {
+  content: attr(aria-label);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.buttons button:hover::after {
+  opacity: 1;
+  visibility: visible;
 }
 
 .svg-pan-zoom_controls {
@@ -129,4 +234,39 @@
 .circleSeats:hover {
   background-color: gray;
   fill: gray;
+}
+
+/* Checkout styling */
+.checkout {
+  padding: 15px;
+  color: white;
+  overflow-y: auto;
+}
+
+.checkout-item {
+  background-color: #444;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.checkout-item:hover {
+  background-color: #555;
+}
+
+.remove-seat {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.remove-seat:hover {
+  transform: scale(1.2);
 }

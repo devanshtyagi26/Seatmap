@@ -138,12 +138,6 @@
         </div>
 
         <div class="seatMapping-container">
-          <div class="checkout"></div>
-          <div class="buttons">
-            <button id="zoomIn">Zoom In</button>
-            <button id="reset">Reset</button>
-            <button id="zoomOut">Zoom Out</button>
-          </div>
           <svg
             class="outlineSvgSkeleton"
             width="1321"
@@ -231,6 +225,13 @@
             />
           </svg>
 
+          <div class="buttons">
+            <button id="zoomIn" aria-label="Zoom In">Zoom In</button>
+            <button id="reset" aria-label="Reset View">Reset</button>
+            <button id="zoomOut" aria-label="Zoom Out">Zoom Out</button>
+          </div>
+
+          <div class="checkout"></div>
           <div class="seatMapping" id="seatMapping"></div>
         </div>
       </div>
@@ -239,5 +240,4 @@
   <script src="./Utils/script.js"></script>
   <script type="module" src="./createSeats.js"></script>
   <!-- <script src="./Utils/zoom.js"></script> -->
-
 </html>
